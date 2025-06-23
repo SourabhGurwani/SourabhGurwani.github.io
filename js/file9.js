@@ -24,18 +24,38 @@ const products=[
 
 // console.log(products[1])
 
-let cart={}
 
-function addToCart(id){
-    if(!cart[id]){ // if id is not present in cart
-        cart[id]=1; // add id with quantity 1
-    }
-    else cart = {...cart,[id]:cart[id]+1};
-}
-addToCart(1)
-addToCart(2)
-addToCart(2)
-console.log(cart)
+//Array
+// const score =[2,1,7,5,3]
+// // score.forEach((ele,idx,arr)=>{
+// //     console.log(ele)
+// // })
+
+// const newScore=score.map((value)=>{   // map=> works as forEach but store in new Array and also return val
+//     return value > 2; // bool value
+
+// });
+
+// console.log(newScore)
+
+
+// const score =[2,1,7,5,3]
+// const newScore = score.filter((value)=>{
+//     return value >2 // it will return values greater than 2
+// })
+// console.log(newScore)
+
+// const score =[2,1,7,5,3]
+// const newScore = score.find((value)=>{
+//     return value >2 // it will return one value >2
+// })
+// console.log(newScore)
+
+const score =[2,1,7,5,3]
+const newScore = score.reduce((sum , val)=>{
+    return sum + val
+})
+console.log(newScore)
 
 
 

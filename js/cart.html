@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+
+    nav { background: #f0f0f0; padding: 10px; display: flex; justify-content: center; gap: 20px; }
+    nav a { text-decoration: none; color: #333; font-weight: bold; }
+    table { width: 90%; margin: 20px auto; border-collapse: collapse; }
+    th, td { border: 1px solid #333; padding: 10px; text-align: center; }
+  </style>
+</head>
+<body onload="displayCart()">
+  <header>
+    <h1>Your Shopping Cart</h1>
+  </header>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="#">Cart</a>
+  </nav>
+
+  <div id="cart"></div>
+
+  <footer>
+    <p>Shopping Cart &copy; 2025. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function displayCart() {
+      const params = new URLSearchParams(window.location.search);
+      const data = params.get("cart");
+      const cartDiv = document.getElementById("cart");
+
+      if (!data) {
+        cartDiv.innerHTML = "<p>No items in cart.</p>";
+        return;
+      }
+
+      const cart = JSON.parse(decodeURIComponent(data));
+      if (!cart.length) {
+        cartDiv.innerHTML = "<p>No items in cart.</p>";
+        return;
+      }
+
+      let total = 0;
+      let html = `
+        <table>
+          <tr><th>Name</th><th>Price</th><th>Qty</th><th>Total</th></tr>
+      `;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        html += `
+          <tr>
+            <td>${item.name}</td>
+            <td>₹${item.price}</td>
+            <td>${item.qty}</td>
+            <td>₹${itemTotal}</td>
+          </tr>
+        `;
+      });
+
+      html += `
+        <tr>
+          <td colspan="3"><strong>Grand Total</strong></td>
+          <td><strong>₹${total}</strong></td>
+        </tr>
+      </table>`;
+
+      cartDiv.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
