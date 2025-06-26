@@ -34,3 +34,8 @@ db.employees.find(
 
 //syntax :  {$or : [{cond 1 },{cond 2}] }
 
+db.employees.find({department:{$ne:"IT"}}) // ne=> not equal
+
+db.employees.find({department : {$in: ["Admin" ,"HR"]}}) //in => either  Admin or  HR
+
+db.employees.find({department : {$nin: ["Admin" ,"HR"]}}) // nin => neither  Admin nor HR
